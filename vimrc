@@ -1,5 +1,7 @@
 syntax on
-colorscheme default
+colorscheme onedark
+
+set tabstop=4
 
 set wildmenu
 
@@ -9,4 +11,8 @@ set smartcase
 set showmatch
 
 set number
-highlight LineNr ctermfg=LightGrey ctermbg=none
+highlight LineNr ctermfg=DarkGrey ctermbg=none
+
+set noeb vb t_vb=
+
+set linebreak
