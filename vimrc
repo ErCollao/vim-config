@@ -1,10 +1,14 @@
 syntax on
 
-let mapleader = ","
+nnoremap <Space> <nop>
+let mapleader = "\<Space>"
 nnoremap <Leader>f :Vex<CR>
 nnoremap <Leader><Leader> <C-w>
 nnoremap <Leader><CR> :noh<CR>
-nnoremap <Leader><Space> :vsplit<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>b :split<CR>
+nnoremap <Leader>t :tab
+nmap :Q :q
 
 set tabstop=4
 
@@ -52,6 +56,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'rakr/vim-one'
 	Plug 'KeitaNakamura/neodark.vim'
+	Plug 'kien/ctrlp.vim'
 call plug#end()
 
 colorscheme neodark
+
