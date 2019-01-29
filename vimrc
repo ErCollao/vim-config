@@ -9,6 +9,7 @@ nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>b :split<CR>
 nnoremap <Leader>t :tab
 nmap :Q :q
+nmap     <Leader><Tab> <Plug>CtrlSFPrompt
 
 set tabstop=4
 
@@ -25,6 +26,7 @@ set noeb vb t_vb=
 
 set linebreak
 
+" Indent to two spaces for ruby, erb, yaml and md
 set autoindent
 filetype plugin indent on
 augroup myfiletypes
@@ -34,8 +36,13 @@ augroup myfiletypes
 	autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
 augroup END
 
+" Make search look good (highlights)
 set hlsearch
 set incsearch
+
+" When you scroll with the mousewheel / pad, it scrolls in Vim not in
+" terminal
+set mouse=a
 
 " Configuration of the tree view
 let g:netrw_banner = 0
@@ -57,7 +64,15 @@ call plug#begin('~/.vim/plugged')
 	Plug 'rakr/vim-one'
 	Plug 'KeitaNakamura/neodark.vim'
 	Plug 'kien/ctrlp.vim'
+	Plug 'dyng/ctrlsf.vim'
+	Plug 'junegunn/goyo.vim'
+	Plug 'junegunn/limelight.vim'
+	Plug 'w0rp/ale'
 call plug#end()
+
+" Goyo is a focus mode that you enter typing :Goyo (and leave it typing :Goyo!), and the following line activates limelight when doing that
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 colorscheme neodark
 
