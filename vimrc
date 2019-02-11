@@ -1,5 +1,11 @@
 syntax on
 
+" Use utf-8 characters (for Spanish accents and such)
+set encoding=utf-8
+
+" Backspace will work like in most other programs
+set backspace=2
+
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 nnoremap <Leader>f :Vex<CR>
@@ -8,6 +14,8 @@ nnoremap <Leader><CR> :noh<CR>
 nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>b :split<CR>
 nnoremap <Leader>t :tab
+vnoremap <C-c> :w !pbcopy<CR><CR>
+noremap <C-v> :r !pbpaste<CR><CR>
 nmap :Q :q
 nmap     <Leader><Tab> <Plug>CtrlSFPrompt
 
@@ -33,7 +41,7 @@ augroup myfiletypes
 	" Clear old autocmds in group
 	autocmd!
 	" autoindent with two spaces, always expand tabs
-	autocmd FileType ruby,eruby,yaml,markdown set ai sw=2 sts=2 et
+	autocmd FileType ruby,eruby,yaml,markdown,css set ai sw=2 sts=2 et
 augroup END
 
 " Make search look good (highlights)
@@ -46,7 +54,7 @@ set mouse=a
 
 " Configuration of the tree view
 let g:netrw_banner = 0
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 0
 let g:netrw_winsize = 25
 
 call plug#begin('~/.vim/plugged')
@@ -68,6 +76,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim'
 	Plug 'w0rp/ale'
+	Plug 'tpope/vim-vinegar'
 call plug#end()
 
 " Goyo is a focus mode that you enter typing :Goyo (and leave it typing :Goyo!), and the following line activates limelight when doing that
@@ -76,3 +85,4 @@ autocmd! User GoyoLeave Limelight!
 
 colorscheme neodark
 
+let g:ale_set_highlights = 0
