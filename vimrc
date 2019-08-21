@@ -1,4 +1,5 @@
 syntax on
+set termguicolors
 
 " Use utf-8 characters (for Spanish accents and such)
 set encoding=utf-8
@@ -41,11 +42,23 @@ nnoremap <Leader>q :q<CR>
 " Save myself from accidental caps
 command Q q
 command W w
+command YANK execute "normal! gg\"*yG"
 
 " Quickly edit vimrc file
 command Evimrc edit ~/.vim/vimrc
+command Svimrc source ~/.vim/vimrc
 
-set tabstop=4
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+set showbreak=↪ 
+set list listchars=tab:››,nbsp:…,trail:…
+
+set scrolloff=2
+set lazyredraw
 
 set wildmenu
 
@@ -62,14 +75,15 @@ set noeb vb t_vb=
 set linebreak
 
 " Indent to two spaces for everything (it was a pain to change for everything)
-set ai sw=2 sts=2 et
+" Used to have this, I think it was overriding stuff
+" set ai sw=2 sts=2 et
 
 filetype plugin indent on
 augroup myfiletypes
-	" Clear old autocmds in group
-	autocmd!
-	" autoindent with two spaces, always expand tabs
-    autocmd FileType markdown set spell
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType markdown set spell
 augroup END
 
 " Hack to make php files indent correctly
@@ -89,85 +103,94 @@ let g:netrw_browse_split = 0
 let g:netrw_winsize = 25
 
 call plug#begin('~/.vim/plugged')
-    " 
-    " Language support for Ruby on Rails editing
-	Plug 'vim-ruby/vim-ruby'
-	Plug 'tpope/vim-rails'
-    "
-    " Matching parentheses
-	Plug 'jiangmiao/auto-pairs'
-    "
-    " Use % to jump between all types of tags, not only parentheses (e.g.
-    " between start and end HTML tags)
-	Plug 'tmhedberg/matchit'
-    "
-    " Adds the verbs gs (surround) and cs (change surround) to modify
-    " surrounding parentheses, tags, etc
-	Plug 'tpope/vim-surround'
-    "
-    " Adds the verb gc (comment)
-	Plug 'vim-scripts/tComment'
-    "
-    " Tab autocompletes in a smart way
-    Plug 'ervandew/supertab'
-    "
-    " Snippets in Vim
-    Plug 'marcweber/vim-addon-mw-utils'
-	Plug 'tomtom/tlib_vim'
-	Plug 'garbas/vim-snipmate'
-	Plug 'honza/vim-snippets'
-    "
-    " Airline shows at the bottom with useful info
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-    "
-    " Neodark colorscheme
-	Plug 'KeitaNakamura/neodark.vim'
-    "
-    " CtrlP fuzzy finder
-	Plug 'kien/ctrlp.vim'
-    "
-    " Adds the :Rg command to grep through the project at blazing speed
-    Plug 'jremmen/vim-ripgrep'
-    "
-    " Plugins to enter zen mode for writing (narrow and highlighted)
-	Plug 'junegunn/goyo.vim'
-	Plug 'junegunn/limelight.vim'
-    "
-    " Asyncronous checking
-    Plug 'w0rp/ale'
-    "
-    " Natural way of using netrw file browser with keystroke - (and other
-    " reasonable configs)
-	Plug 'tpope/vim-vinegar'
-    "
-    " Language support for Vue
-	Plug 'posva/vim-vue'
-	" 
-	" Plugins to explore at some point
-    "
-    " Check what overlaps exist between supertab and vim-snippets
-	" 
-	" HTML generator
-	" Plug 'rstacruz/sparkup'
-    "
-    " Using Ack for search, check differences with ripgrep and :Rg (they seem
-    " equally fast)
-    " Plug 'mileszs/ack.vim'
-    "
-    " Colorschemes
-	" Plug 'rakr/vim-one'
-	"
-    " Need to check again what they do
-	" Plug 'dyng/ctrlsf.vim'
-    "
+  " 
+  " Language support for Ruby on Rails editing
+  Plug 'vim-ruby/vim-ruby'
+  " Lets plugins (e.g. vim-surround) repeat with the . command
+  Plug 'tpope/vim-rails'
+  "
+  " Matching parentheses
+  Plug 'jiangmiao/auto-pairs'
+  "
+  " Use % to jump between all types of tags, not only parentheses (e.g.
+  " between start and end HTML tags)
+  Plug 'tmhedberg/matchit'
+  "
+  " Adds the verbs gs (surround) and cs (change surround) to modify
+  " surrounding parentheses, tags, etc
+  Plug 'tpope/vim-surround'
+  " Lets plugins (e.g. vim-surround) repeat with the . command
+  Plug 'tpope/vim-repeat'
+  "
+  " Adds the verb gc (comment)
+  Plug 'vim-scripts/tComment'
+  "
+  " Tab autocompletes in a smart way
+  Plug 'ervandew/supertab'
+  "
+  " Snippets in Vim
+  Plug 'marcweber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'garbas/vim-snipmate'
+  Plug 'honza/vim-snippets'
+  "
+  " Airline shows at the bottom with useful info
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  "
+  "
+  " CtrlP fuzzy finder
+  Plug 'kien/ctrlp.vim'
+  "
+  " Adds the :Rg command to grep through the project at blazing speed
+  Plug 'jremmen/vim-ripgrep'
+  "
+  " Plugins to enter zen mode for writing (narrow and highlighted)
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
+  "
+  " Asyncronous checking
+  Plug 'w0rp/ale'
+  "
+  " Natural way of using netrw file browser with keystroke - (and other
+  " reasonable configs)
+  Plug 'tpope/vim-vinegar'
+  "
+  " Language support for Vue
+  Plug 'posva/vim-vue'
+  " 
+  " Plugins to explore at some point
+  "
+  " Check what overlaps exist between supertab and vim-snippets
+  " 
+  " HTML generator
+  " Plug 'rstacruz/sparkup'
+  "
+  " Using Ack for search, check differences with ripgrep and :Rg (they seem
+  " equally fast)
+  " Plug 'mileszs/ack.vim'
+  "
+  " Colorschemes
+  " Plug 'KeitaNakamura/neodark.vim'
+  " Plug 'rakr/vim-one'
+  " Plug 'arcticicestudio/nord-vim'
+  " Need to check again what they do
+  " Plug 'dyng/ctrlsf.vim'
+  " Plug 'sainnhe/edge'
+  "
 call plug#end()
 
 " Goyo is a focus mode that you enter typing :Goyo (and leave it typing :Goyo!), and the following line activates limelight when doing that
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-colorscheme neodark
+colorscheme onedark
+" colorscheme neodark
+" colorscheme nord
+" colorscheme edge
 
 " Configuration of ALE linter
 let g:ale_set_highlights = 0
+
+" Mods to the colorscheme
+hi NonText ctermfg=none
