@@ -171,6 +171,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'mileszs/ack.vim'
   "
   " Colorschemes
+  Plug 'joshdick/onedark.vim'
   " Plug 'KeitaNakamura/neodark.vim'
   " Plug 'rakr/vim-one'
   " Plug 'arcticicestudio/nord-vim'
