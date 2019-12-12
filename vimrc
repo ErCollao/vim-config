@@ -68,7 +68,7 @@ set smartcase
 set showmatch
 
 " Line numbers
-set number
+set relativenumber
 
 set noeb vb t_vb=
 
