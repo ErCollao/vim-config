@@ -158,6 +158,9 @@ call plug#begin('~/.vim/plugged')
   "
   " Language support for Vue
   Plug 'posva/vim-vue'
+  "
+  " Navigates seamlessly panes from vim and tmux (ctrl+hjkl)
+  Plug 'christoomey/vim-tmux-navigator'
   " 
   " Plugins to explore at some point
   "
