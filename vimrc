@@ -1,6 +1,8 @@
 syntax on
 set termguicolors
 
+set nocompatible
+
 " Use utf-8 characters (for Spanish accents and such)
 set encoding=utf-8
 
@@ -38,6 +40,9 @@ nnoremap <Leader>u 1z=
 
 " Quit
 nnoremap <Leader>q :q<CR>
+
+" Repeat the last macro, used often (instead of going into Ex mode)
+nnoremap Q @@
 
 " Save myself from accidental caps
 command Q q
@@ -161,6 +166,9 @@ call plug#begin('~/.vim/plugged')
   "
   " Navigates seamlessly panes from vim and tmux (ctrl+hjkl)
   Plug 'christoomey/vim-tmux-navigator'
+  "
+  " Lets me use Vim as a wiki with easy keybindings
+  Plug 'vimwiki/vimwiki'
   " 
   " Plugins to explore at some point
   "
@@ -197,3 +205,6 @@ let g:ale_set_highlights = 0
 
 " Mods to the colorscheme
 hi NonText ctermfg=none
+
+" Config for Vim WIKI
+let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md'}]
