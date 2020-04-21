@@ -9,49 +9,6 @@ set encoding=utf-8
 " Backspace will work like in most other programs
 set backspace=2
 
-" ***** Mappings *****
-
-" Make the spacebar the leader key
-nnoremap <Space> <nop>
-let mapleader = "\<Space>"
-
-" Remove highlights
-nnoremap <Leader><CR> :noh<CR>
-
-" Easier split navigation with double click on leader
-nnoremap <Leader><Leader> <C-w>
-
-" Open file eplorer on the side
-nnoremap <Leader>f :Vex<CR>
-
-" Quick splits and tabs
-nnoremap <Leader>v :vsplit<CR>
-nnoremap <Leader>b :split<CR>
-nnoremap <Leader>t :tabnew<CR>
-
-" Search and replace in the whole document
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-
-" Activate spellcheck
-nnoremap <Leader>a :set spell!<CR>
-
-" Spellcheck word (pick first option)
-nnoremap <Leader>u 1z=
-
-" Quit
-nnoremap <Leader>q :q<CR>
-
-" Repeat the last macro, used often (instead of going into Ex mode)
-nnoremap Q @@
-
-" Save myself from accidental caps
-command Q q
-command W w
-command YANK execute "normal! gg\"*yG"
-
-" Quickly edit vimrc file
-command Evimrc edit ~/.vim/vimrc
-command Svimrc source ~/.vim/vimrc
 
 set autoindent
 set tabstop=2
@@ -133,6 +90,9 @@ call plug#begin('~/.vim/plugged')
   " Tab autocompletes in a smart way
   Plug 'ervandew/supertab'
   "
+  " Lets languages understand more programming languages
+  Plug 'sheerun/vim-polyglot'
+  "
   " Snippets in Vim
   Plug 'marcweber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
@@ -145,7 +105,7 @@ call plug#begin('~/.vim/plugged')
   "
   "
   " CtrlP fuzzy finder
-  Plug 'kien/ctrlp.vim'
+  " Plug 'kien/ctrlp.vim'
   "
   " Adds the :Rg command to grep through the project at blazing speed
   Plug 'jremmen/vim-ripgrep'
@@ -157,7 +117,6 @@ call plug#begin('~/.vim/plugged')
   " Asyncronous checking
   Plug 'w0rp/ale'
   "
-  " Natural way of using netrw file browser with keystroke - (and other
   " reasonable configs)
   Plug 'tpope/vim-vinegar'
   "
@@ -170,6 +129,7 @@ call plug#begin('~/.vim/plugged')
   " Lets me use Vim as a wiki with easy keybindings
   Plug 'vimwiki/vimwiki'
   " 
+  " Natural way of using netrw file browser with keystroke - (and other
   " Plugins to explore at some point
   "
   " Check what overlaps exist between supertab and vim-snippets
@@ -200,6 +160,7 @@ colorscheme onedark
 " colorscheme neodark
 " colorscheme nord
 " colorscheme edge
+let g:airline_theme='onedark'
 
 " Configuration of ALE linter
 let g:ale_set_highlights = 0
@@ -208,4 +169,63 @@ let g:ale_set_highlights = 0
 hi NonText ctermfg=none
 
 " Config for Vim WIKI
-let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md.wiki'}]
+
+" Custom config for Vim WIKI
+au FileType vimwiki call SetVimwikiKeybindings()
+function SetVimwikiKeybindings()
+  nmap <F13> <Plug>VimwikiRemoveHeaderLevel
+  nmap - <Plug>VimwikiGoBackLink
+endfunction
+
+" ***** Mappings *****
+
+" Make the spacebar the leader key
+nnoremap <Space> <nop>
+let mapleader = "\<Space>"
+
+" Remove highlights
+nnoremap <Leader><CR> :noh<CR>
+
+" Easier split navigation with double click on leader
+nnoremap <Leader><Leader> <C-w>
+
+" Open file eplorer on the side
+nnoremap <Leader>f :Vex<CR>
+
+" Quick splits and tabs
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>b :split<CR>
+nnoremap <Leader>t :tabnew<CR>
+
+" Search and replace in the whole document
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+
+" Activate spellcheck
+nnoremap <Leader>a :set spell!<CR>
+
+" Spellcheck word (pick first option)
+nnoremap <Leader>u 1z=
+
+" Quit
+nnoremap <Leader>q :q<CR>
+
+" TODO: mapping for search function
+" Easier navigation of search results
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-p> :cprevious<CR>
+
+" Repeat the last macro, used often (instead of going into Ex mode)
+nnoremap QQ @@
+
+
+" *********** COMMANDS ************* 
+
+" Save myself from accidental caps
+command Q q
+command W w
+command YANK execute "normal! gg\"*yG"
+
+" Quickly edit vimrc file
+command Evimrc edit ~/.vim/vimrc
+command Svimrc source ~/.vim/vimrc
