@@ -9,7 +9,6 @@ set encoding=utf-8
 " Backspace will work like in most other programs
 set backspace=2
 
-
 set autoindent
 set tabstop=2
 set shiftwidth=2
@@ -36,9 +35,10 @@ set noeb vb t_vb=
 
 set linebreak
 
-" Indent to two spaces for everything (it was a pain to change for everything)
-" Used to have this, I think it was overriding stuff
-" set ai sw=2 sts=2 et
+" Make splits open in the places that make sense
+set splitbelow splitright
+
+set fillchars+=vert:│
 
 filetype plugin indent on
 augroup myfiletypes
@@ -229,3 +229,5 @@ command YANK execute "normal! gg\"*yG"
 " Quickly edit vimrc file
 command Evimrc edit ~/.vim/vimrc
 command Svimrc source ~/.vim/vimrc
+
+highlight VertSplit guifg=#3E4452
