@@ -174,8 +174,8 @@ let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md.wiki
 " Custom config for Vim WIKI
 au FileType vimwiki call SetVimwikiKeybindings()
 function SetVimwikiKeybindings()
-  nmap <F13> <Plug>VimwikiRemoveHeaderLevel
-  nmap - <Plug>VimwikiGoBackLink
+  nmap <buffer> <F13> <Plug>VimwikiRemoveHeaderLevel
+  nmap <buffer> - <Plug>VimwikiGoBackLink
 endfunction
 
 " ***** Mappings *****
