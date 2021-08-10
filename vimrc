@@ -86,6 +86,8 @@ call plug#begin('~/.vim/plugged')
   " Adds the verbs gs (surround) and cs (change surround) to modify
   " surrounding parentheses, tags, etc
   Plug 'tpope/vim-surround'
+  " Integrates git in vim
+  Plug 'tpope/vim-fugitive'
   " Lets plugins (e.g. vim-surround) repeat with the . command
   Plug 'tpope/vim-repeat'
   "
@@ -175,6 +177,7 @@ hi NonText ctermfg=none
 
 " Config for Vim WIKI
 let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md.wiki'}]
+let g:vimwiki_global_ext = 0
 
 " Custom config for Vim WIKI
 au FileType vimwiki call SetVimwikiKeybindings()
@@ -203,6 +206,8 @@ nnoremap <Leader>v :vsplit<CR>
 nnoremap <Leader>b :split<CR>
 nnoremap <Leader>t :tabnew<CR>
 
+" Quick run-with-ruby
+nnoremap <Leader>r :w<cr>:!ruby %<cr>
 " Search and replace in the whole document
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
@@ -223,6 +228,8 @@ nnoremap <C-p> :cprevious<CR>
 " Repeat the last macro, used often (instead of going into Ex mode)
 nnoremap QQ @@
 
+nnoremap n nzz
+nnoremap N Nzz
 
 " *********** COMMANDS ************* 
 
@@ -236,3 +243,13 @@ command Evimrc edit ~/.vim/vimrc
 command Svimrc source ~/.vim/vimrc
 
 highlight VertSplit guifg=#3E4452
+
+function! Json() abort
+  silent ! clear
+  silent %! python -m json.tool
+endfunction
+
+command! Json :call Json()
+
+" Configuration for snifMate
+let g:snipMate = { 'snippet_version' : 1  }
