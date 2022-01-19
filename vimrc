@@ -110,12 +110,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   "
+  " Use .editorconfig file for indentation and the like
+  Plug 'editorconfig/editorconfig-vim'
+  "
   "
   " CtrlP fuzzy finder
   " Plug 'kien/ctrlp.vim'
-  "
-  " Adds the :Rg command to grep through the project at blazing speed
-  Plug 'jremmen/vim-ripgrep'
   "
   " Plugins to enter zen mode for writing (narrow and highlighted)
   Plug 'junegunn/goyo.vim'
@@ -129,6 +129,9 @@ call plug#begin('~/.vim/plugged')
   "
   " Language support for Vue
   Plug 'posva/vim-vue'
+  "
+  " Language support for Svelte
+  Plug 'evanleck/vim-svelte', {'branch': 'main'}
   "
   " Navigates seamlessly panes from vim and tmux (ctrl+hjkl)
   Plug 'christoomey/vim-tmux-navigator'
@@ -147,6 +150,7 @@ call plug#begin('~/.vim/plugged')
   " Using Ack for search, check differences with ripgrep and :Rg (they seem
   " equally fast)
   " Plug 'mileszs/ack.vim'
+  Plug 'lamchau/vim-ripgrep', { 'branch': 'patch-1' }
   "
   " Colorschemes
   Plug 'joshdick/onedark.vim'
@@ -175,6 +179,9 @@ let g:ale_set_highlights = 0
 " Mods to the colorscheme
 hi NonText ctermfg=none
 
+" Config for EditorConfig to play nice with Vim Fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " Config for Vim WIKI
 let g:vimwiki_list = [{'path': '~/.wiki', 'syntax': 'markdown', 'ext': '.md.wiki'}]
 let g:vimwiki_global_ext = 0
@@ -196,7 +203,7 @@ let mapleader = "\<Space>"
 nnoremap <Leader><CR> :noh<CR>
 
 " Easier split navigation with double click on leader
-nnoremap <Leader><Leader> <C-w>
+" nnoremap <Leader><Leader> <C-w>
 
 " Open file eplorer on the side
 nnoremap <Leader>f :Vex<CR>
@@ -218,7 +225,7 @@ nnoremap <Leader>a :set spell!<CR>
 nnoremap <Leader>u 1z=
 
 " Quit
-nnoremap <Leader>q :q<CR>
+" nnoremap <Leader>q :q<CR>
 
 " TODO: mapping for search function
 " Easier navigation of search results
@@ -236,6 +243,7 @@ nnoremap N Nzz
 " Save myself from accidental caps
 command Q q
 command W w
+
 command YANK execute "normal! gg\"*yG"
 
 " Quickly edit vimrc file
@@ -251,5 +259,8 @@ endfunction
 
 command! Json :call Json()
 
-" Configuration for snifMate
+" Configuration for snipMate
 let g:snipMate = { 'snippet_version' : 1  }
+
+" Search with leader-/
+nnoremap <Leader>/ :Rg<space>
